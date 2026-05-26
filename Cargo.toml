@@ -1,0 +1,31 @@
+[package]
+name = "hive-ledger"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Honey Ledger — Postgres-backed event-sourced credit accounting for HiveFabric tenants."
+
+[dependencies]
+async-trait = "0.1"
+axum = { version = "0.7", features = ["macros"] }
+chrono = { version = "0.4", features = ["serde"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sqlx = { version = "0.8", default-features = false, features = ["runtime-tokio-rustls", "postgres", "uuid", "chrono", "macros", "migrate"] }
+thiserror = "2"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "time", "signal"] }
+tower-http = { version = "0.6", features = ["trace", "cors"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+uuid = { version = "1", features = ["serde", "v4"] }
+
+[dev-dependencies]
+hyper = "1"
+http-body-util = "0.1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "test-util"] }
+tower = { version = "0.5", features = ["util"] }
+
+[[bin]]
+name = "hive-ledger"
+path = "src/bin/hive_ledger.rs"
+required-features = []
